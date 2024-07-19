@@ -100,7 +100,7 @@ def main():
 
         dg_connection = deepgram.listen.live.v("1")
 
-        air_date = "2004-12-31"
+        air_date = "2010-07-06"
 
         df = pd.read_csv("jeopardySmall.csv")
 
@@ -141,11 +141,11 @@ def main():
                     if catCosines:
                         max_cosine_val = max(catCosines)
 
-                        if max_cosine_val > 0:
+                        if max_cosine_val > 0.5:
                             index_max = catCosines.index(max_cosine_val)
                             finalCategory = categories[index_max]
 
-                        print(catCosines)
+                        #print(catCosines)
                         #print("The category chosen:", finalCategory)
 
                         if "list categories" in utterance_cleaned:
@@ -156,7 +156,7 @@ def main():
                         print(f"Category Matched: {finalCategory}")
                         category_df = pickCategory(finalCategory, game)
 
-                        #print(category_df.iloc[:, 4:5])
+                        print(category_df.iloc[:, 4:5])
 
                         values = category_df[' Value'].tolist()
                         values = ["Final Jeopardy" if isinstance(val, float) or val == "None" else val for val in values]
